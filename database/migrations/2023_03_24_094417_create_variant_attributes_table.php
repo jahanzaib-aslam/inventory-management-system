@@ -1,0 +1,37 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('variant_attributes', function (Blueprint $table) {
+            $table->id();
+            $table->bigInteger('variant_id')->unsigned();
+            $table->bigInteger('attribute_id')->unsigned();
+            $table->string('value');
+            $table->bigInteger('attribute_unit_id')->unsigned()->nullable();
+            $table->integer('sort');
+            $table->timestamps();
+        });
+
+        Schema::table('variant_attributes', function($table) {
+            $table->foreign('attribute_id')->references('id')->on('attributes')->onDelete('cascade');
+            $table->foreign('attribute_unit_id')->references('id')->on('attribute_unit')->onDelete('cascade');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('variant_attributes');
+    }
+};
