@@ -6,4 +6,6 @@
 
 ## composer install
 
+## set up .env file
+
 ## php artisan serve
