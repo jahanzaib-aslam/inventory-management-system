@@ -2,6 +2,7 @@
 
 namespace App\Services\Auth;
 
+use App\Helpers\ResponseCode;
 use App\Http\Requests\user\LoginRequest;
 use App\Http\Resources\user\LoginResource;
 use App\Models\User;
@@ -25,7 +26,7 @@ class AuthService {
 
         $user = new LoginResource($user);
 
-        $this->response->setResponse(1, 'logged in successfully',  $user->toArray($this->request));
+        $this->response->setResponse(ResponseCode::Regular->value, 'logged in successfully',  $user->toArray($this->request));
 
         return $this->response;
     }
@@ -34,7 +35,7 @@ class AuthService {
     {
         auth()->user()->currentAccessToken()->delete();
 
-        $this->response->setResponse(1, 'logged out successfully');
+        $this->response->setResponse(ResponseCode::Regular->value, 'logged out successfully');
 
         return $this->response;
 

@@ -2,6 +2,7 @@
 
 namespace App\Services\ProductType;
 
+use App\Helpers\ResponseCode;
 use App\Models\ProductType;
 use App\Repositories\ProductTypeRepository;
 use App\Responses\ProductTypeResponse;
@@ -18,7 +19,7 @@ class ProductTypeService {
     {
         $productType =  $this->repository->create($request);
 
-        $this->response->setResponse(1, 'Product type created successfully.', $productType->toArray($this->request));
+        $this->response->setResponse(ResponseCode::Regular->value, 'Product type created successfully.', $productType->toArray($this->request));
 
         return $this->response;
     }
@@ -27,7 +28,7 @@ class ProductTypeService {
     {
         $this->repository->destroy($type);
 
-        $this->response->setResponse(1, 'Product type deleted successfully.');
+        $this->response->setResponse(ResponseCode::Regular->value, 'Product type deleted successfully.');
 
         return $this->response;
     }

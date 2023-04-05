@@ -2,6 +2,7 @@
 
 namespace App\Services\User;
 
+use App\Helpers\ResponseCode;
 use App\Http\Resources\user\UserResource;
 use App\Repositories\UserRepository;
 use App\Responses\UserResponse;
@@ -17,7 +18,7 @@ class UserService {
     {
         $user =  $this->repository->create($request);
         $user =  new UserResource($user);
-        $this->response->setResponse(1, 'success', $user->toArray($this->request));
+        $this->response->setResponse(ResponseCode::Regular->value, 'success', $user->toArray($this->request));
         return $this->response;
     }
 
@@ -26,7 +27,7 @@ class UserService {
         $this->repository->update($request['id'], $request);
         $user =  $this->repository->getById($request['id']);
         $user =  new UserResource($user);
-        $this->response->setResponse(1, 'success', $user->toArray($this->request));
+        $this->response->setResponse(ResponseCode::Regular->value, 'success', $user->toArray($this->request));
         return $this->response;
     }
 }

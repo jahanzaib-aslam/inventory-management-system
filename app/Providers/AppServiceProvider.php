@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Http\Response as HttpResponse;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Response;
 
@@ -30,7 +31,7 @@ class AppServiceProvider extends ServiceProvider
             ]);
        });
 
-       Response::macro('error', function ($code, $message, $error, $status = 400){
+       Response::macro('error', function ($code, $message, $error, $status = HttpResponse::HTTP_BAD_REQUEST){
            return response()->json([
                'code'      =>  $code,
                'message'   =>  $message,

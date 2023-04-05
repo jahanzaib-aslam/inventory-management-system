@@ -2,6 +2,7 @@
 
 namespace App\Services\Product;
 
+use App\Helpers\ResponseCode;
 use App\Http\Requests\product\CreateProductRequest;
 use App\Http\Resources\product\ProductResource;
 use App\Models\Product;
@@ -28,7 +29,7 @@ class ProductService {
 
         $product =  new ProductResource($product);
 
-        $this->response->setResponse(1, 'product created successfully', $product->toArray($this->request));
+        $this->response->setResponse(ResponseCode::Regular->value, 'product created successfully', $product->toArray($this->request));
 
         return $this->response;
     }
@@ -46,7 +47,7 @@ class ProductService {
 
         $product =  new ProductResource($product);
 
-        $this->response->setResponse(1, 'product updated successfully', $product->toArray($this->request));
+        $this->response->setResponse(ResponseCode::Regular->value, 'product updated successfully', $product->toArray($this->request));
 
         return $this->response;
 
@@ -58,7 +59,7 @@ class ProductService {
         $product =  $this->repository->getById($id);
         $product = new ProductResource($product);
 
-        $this->response->setResponse(1, 'product created successfully', $product->toArray($this->request));
+        $this->response->setResponse(ResponseCode::Regular->value, 'product created successfully', $product->toArray($this->request));
 
         return $this->response;
     }
@@ -80,7 +81,7 @@ class ProductService {
 
         $productList = ProductResource::collection($productList);
 
-        $this->response->setResponse(1, 'list of products', $productList->toArray($this->request));
+        $this->response->setResponse(ResponseCode::Regular->value, 'list of products', $productList->toArray($this->request));
 
         return $this->response;
     }

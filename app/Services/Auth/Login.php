@@ -33,7 +33,7 @@ class Login {
 
     private function getUser(string $username) : User
     {
-        $user = $this->repository->getByCondtion(['username' => $username]);
+        $user = $this->repository->getByCondition(['username' => $username]);
 
         if(!$user){
             throw new ModelNotFoundException('Invalid User');
